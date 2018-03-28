@@ -6,6 +6,8 @@ using namespace std;
 
 	char encrypt(char input, char keychar);
 	char decrypt(char input, char keychar);
+	
+	void encr ();
 
 int main (){
 	
@@ -29,7 +31,6 @@ int main (){
 	do {
 		cout << endl;
 		cout << "Would you like to encrypt(e) or decrypt(d) a message: " << endl;
-		cout endl;
 		cin >> action;
 		cin.ignore(50,'\n');
 		cout << endl;
@@ -37,9 +38,9 @@ int main (){
 		if (action == 'e') {
 				encr ();
 		}
-		else if (action == 'd'){
-			decr();
-		}
+		//else if (action == 'd'){
+		//	decr();
+		//}
 		else {
 			cout << "Wrong action selected please try again" << endl;
 		}
@@ -55,8 +56,7 @@ int main (){
 	return 0;
 }
 
-char encrypt(char input, char keychar);
-{
+char encrypt(char input, char keychar){
 	char x, y;
 	
 	if (input== ' ' ) x=27;
@@ -69,5 +69,53 @@ char encrypt(char input, char keychar);
 	if (R < 0)
 		R += 27;
 	if (!R) return ' ';
-	return R + 'a'a-1;
+	return R + 'a'-1;
+}
+
+char decrypt(char input, char keychar){
+	char x, y;
+	
+	if (input == ' ') x = 0;
+	else x = input - 'a' + 1;
+	
+	if (keychar == ' ') y = 0;
+	else y = keychar - 'a' + 1;
+	
+	char R = x - y;
+	if (R < 0)
+			R+= 27;
+	if (!R) return ' ';
+	return R + 'a' -1;
+}
+
+void encr () {
+	char f_name;
+	char action;
+	string msg;
+	char input;
+	char keychar;
+	
+	ifstream dat("file1.dat");
+		char encryptedStr[500];
+		
+		cout << "Enter message to be encrypted: " << endl;
+		getline(cin, msg);
+		{
+			int i;
+			for (i = 0; i < msg.length(); i++)
+			{
+				
+				while(1)
+					dat >> keychar;
+				
+				if (keychar == ' ' || (keychar >= 'a' && keychar <= 'z'))
+					break;
+				char c = encrypt(msg[i], keychar);
+				encryptedStr[i] = c;
+			}
+			encryptedStr[i] = 0;
+			cout << encryptedStr<<endl;
+			cout << endl;
+		}
+		dat.close();
 }
