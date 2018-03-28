@@ -8,6 +8,7 @@ using namespace std;
 	char decrypt(char input, char keychar);
 	
 	void encr ();
+	void decr ();
 
 int main (){
 	
@@ -38,9 +39,9 @@ int main (){
 		if (action == 'e') {
 				encr ();
 		}
-		//else if (action == 'd'){
-		//	decr();
-		//}
+		else if (action == 'd'){
+			decr();
+		}
 		else {
 			cout << "Wrong action selected please try again" << endl;
 		}
@@ -119,3 +120,41 @@ void encr () {
 		}
 		dat.close();
 }
+
+void decr(){
+
+	char f_name;
+	char action;
+	string msg;
+	char input;
+	char keychar;
+	
+	ifstream dat("file1.dat");
+		char decryptedStr[500];
+		string secr_msg;
+		
+		cout << "Enter message to decrypt: "<< endl;
+		getline(cin, secr_msg);
+		
+		{
+			int i;
+			for (i=0;i < secr_msg.length(); i++)
+			{
+				while(1)
+					dat>>keychar;
+				
+				if (keychar == ' ' || (keychar >= 'a' && keychar <= 'z'))
+					break;
+				
+					char c = decrypt(secr_msg[i],keychar);
+					decryptedStr[i] =c;
+			}
+			decryptedStr[i] = 0;
+			cout << decryptedStr << endl;
+		}
+		
+		dat.close();
+		}
+		
+
+
